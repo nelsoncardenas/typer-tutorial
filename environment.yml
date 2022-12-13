@@ -1,0 +1,11 @@
+name: env_typer
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python==3.11
+  - black
+  - click
+  - flake8
+  - typer
+  - isort
