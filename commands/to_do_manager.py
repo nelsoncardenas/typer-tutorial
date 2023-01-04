@@ -23,11 +23,13 @@ def list():
     """Lists all tasks in the to-do list."""
     with open("todo.json") as f:
         todo = json.load(f)
-
+    if len(todo) == 0:
+        print("The list is empty!")
+        return None
     # print the tasks in the list
     print("Tasks:")
     for task in todo:
-        typer.echo(f"- {task}")
+        print(f"- {task}")
 
 
 @app.command()
