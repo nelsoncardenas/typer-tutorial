@@ -1,5 +1,7 @@
-import typer
 import json
+
+import typer
+from rich import print
 
 app = typer.Typer()
 
@@ -23,16 +25,18 @@ def list():
     """Lists all tasks in the to-do list."""
     with open("todo.json") as f:
         todo = json.load(f)
-
+    if len(todo) == 0:
+        print("The list is empty!")
+        return None
     # print the tasks in the list
     print("Tasks:")
     for task in todo:
-        typer.echo(f"- {task}")
+        print(f"- [green]{task}[/green]")
 
 
 @app.command()
-def remove(task: str):
-    """Removes a task from the to-do list."""
+def delete(task: str):
+    """Deletes a task from the to-do list."""
     with open("todo.json") as f:
         todo = json.load(f)
 
