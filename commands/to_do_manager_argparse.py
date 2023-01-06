@@ -15,7 +15,7 @@ def add(task: str):
         json.dump(todo, f)
 
 
-def get_list():
+def list():
     """Lists all tasks in the to-do list."""
     with open("todo.json") as f:
         todo = json.load(f)
@@ -28,8 +28,8 @@ def get_list():
         print(f"- {task}")
 
 
-def remove(task: str):
-    """Removes a task from the to-do list."""
+def delete(task: str):
+    """Deletes a task from the to-do list."""
     with open("todo.json") as f:
         todo = json.load(f)
 
@@ -51,14 +51,16 @@ if __name__ == "__main__":
 
     # Create the parser for the "add" command
     parser_add = subparsers.add_parser("add")
-    parser_add.add_argument("task", help="Adds a task to the to-do list.")
+    parser_add.add_argument("task", type=str, help="Adds a task to the to-do list.")
 
     # Create the parser for the "list" command
     parser_list = subparsers.add_parser("list")
 
-    # Create the parser for the "remove" command
-    parser_remove = subparsers.add_parser("remove")
-    parser_remove.add_argument("task", help="Removes a task from the to-do list.")
+    # Create the parser for the "delete" command
+    parser_delete = subparsers.add_parser("delete")
+    parser_delete.add_argument(
+        "task", type=str, help="Deletes a task from the to-do list."
+    )
 
     # Parse the arguments
     args = parser.parse_args()
@@ -66,6 +68,6 @@ if __name__ == "__main__":
     if args.command == "add":
         add(args.task)
     elif args.command == "list":
-        get_list()
-    elif args.command == "remove":
-        remove(args.task)
+        list()
+    elif args.command == "delete":
+        delete(args.task)
